@@ -13,22 +13,24 @@
 ActiveRecord::Schema.define(version: 2020_11_15_194350) do
 
   create_table "events", force: :cascade do |t|
-    t.string "name"
-    t.integer "month"
-    t.integer "day"
-    t.integer "year"
-    t.string "description"
+    t.string "event_name"
+    t.integer "event_month"
+    t.integer "event_day"
+    t.integer "event_year"
+    t.string "event_description"
+    t.integer "location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_events_on_location_id"
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string "name"
-    t.string "address_line_one"
-    t.string "address_line_two"
-    t.string "city"
-    t.string "state"
-    t.integer "zip"
+    t.string "location_name"
+    t.string "location_address_line_one"
+    t.string "location_address_line_two"
+    t.string "location_city"
+    t.string "location_state"
+    t.integer "location_zip_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

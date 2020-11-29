@@ -15,7 +15,7 @@ class LocationsController < ApplicationController
     end
 
     def create
-        @location = Location.create(location_params(:name, :address_line_one, :address_line_two, :city, :state, :zip))
+        @location = Location.create(location_params(:location_name, :location_address_line_one, :location_address_line_two, :location_city, :location_state, :location_zip_code))
         render json: @location         
     end
 
@@ -23,7 +23,7 @@ class LocationsController < ApplicationController
     end
 
     def update
-        @location.update(location_params(:name, :address_line_one, :address_line_two, :city, :state, :zip))
+        @location.update(location_params(:location_name, :location_address_line_one, :location_address_line_two, :location_city, :location_state, :location_zip_code))
     end
 
     def destroy

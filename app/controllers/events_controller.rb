@@ -15,7 +15,7 @@ class EventsController < ApplicationController
     end
 
     def create
-        @event = Event.create(event_params(:name, :month, :day, :year, :description))
+        @event = Event.create(event_params(:event_name, :event_month, :event_day, :event_year, :event_description, :location_id))
         render json: @event         
     end
 
@@ -23,7 +23,7 @@ class EventsController < ApplicationController
     end
 
     def update
-        @event.update(event_params(:name, :month, :day, :year, :description))
+        @event.update(event_params(:event_name, :event_month, :event_day, :event_year, :event_description, :location_id))
     end
 
     def destroy
