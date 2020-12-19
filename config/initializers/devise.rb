@@ -97,7 +97,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = [:http_auth]
+  # config.skip_session_storage = [:http_auth]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
@@ -263,7 +263,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = ['*/*', :html, :json]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
@@ -310,13 +310,17 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   config.jwt do |jwt|
-    jwt.secret = ENV['DEVISE_SECRET_KEY']
+    jwt.secret = 'da119c664f24e911bcfd5c92aa8376442dcdae6f951b7ef7e3f0359650791a37cf6cda388a696ac696f4dd8f4480154f211989c36c9ea48d0937533e7b534d89'
     jwt.dispatch_requests = [
-        ['POST', %r{^/login$}]
+        ['POST', %r{^/users/sign_in$}]
       ]
       jwt.revocation_requests = [
-        ['DELETE', %r{^/logout$}]
+        ['DELETE', %r{^/users/sign_out$}]
       ]
     jwt.expiration_time = 60.minutes.to_i
+  end
+
+  config.warden do |manager|
+    manager.failure_app = CustomAuthFailure
   end
 end
