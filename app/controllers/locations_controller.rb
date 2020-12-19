@@ -16,7 +16,7 @@ class LocationsController < ApplicationController
 
     def create
         @location = Location.create(location_params(:location_name, :location_address_line_one, :location_address_line_two, :location_city, :location_state, :location_zip_code))
-        render json: @location         
+        render json: @location
     end
 
     def edit

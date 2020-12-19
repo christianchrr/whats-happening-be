@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_194350) do
+ActiveRecord::Schema.define(version: 2020_12_19_145906) do
 
   create_table "events", force: :cascade do |t|
     t.string "event_name"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 2020_11_15_194350) do
     t.index ["location_id"], name: "index_events_on_location_id"
   end
 
+  create_table "jwt_blacklists", force: :cascade do |t|
+    t.string "jti"
+    t.datetime "exp"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["jti"], name: "index_jwt_blacklists_on_jti"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "location_name"
     t.string "location_address_line_one"
@@ -33,6 +41,18 @@ ActiveRecord::Schema.define(version: 2020_11_15_194350) do
     t.integer "location_zip_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
